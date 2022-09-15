@@ -80,28 +80,37 @@ function playRound(){
 function game(){
     // Declares variables for computer and user score
     let computerScore = 0, playerScore = 0;
+    // Loops the game for 5 rounds
     for(let i = 0; i < 5; i++){
         result = playRound()
-        console.log(result)
+        alert(result)
+        // If won is in the playround return, adds to player score
         if(result.includes("won")){
             playerScore ++
         }
+        // If lost is in return, adds to pc score
         else if(result.includes("lost")){
             computerScore ++
         }
     }
-    console.log(`Final Score:
+
+    // Prints an alert with the final score
+    let outcome = `Final Score:
 Player: ${playerScore}
-Computer: ${computerScore}`)
+Computer: ${computerScore}
+`;
+
+    // Adds a qualifying message onto the end depending on the result
     if (computerScore == playerScore){
-        console.log("It's a draw!")
+        outcome += `It's a draw!`
     }
     else if(playerScore > computerScore){
-        console.log("You win!")
+        outcome +=`You win!`
     }
     else{
-        console.log("You lost!")
+        outcome += `You lost!`
     }
+    alert(outcome)
 }
 
 game()
