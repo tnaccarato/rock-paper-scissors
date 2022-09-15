@@ -4,6 +4,7 @@ function getComputerChoice(){
     let computerNumber = Math.floor((Math.random() * 3) + 1);
     // Assigns a variable for storing the computer choice
     let computerChoice
+
     // Assigns rock, paper or scissors depending on the value
     switch (computerNumber) {
         case 1:
@@ -36,9 +37,7 @@ function playRound(){
         + "paper or scissors:");
         playerSelection = playerSelection.trim().toLowerCase();
     }
-    // Anticipates whitespace around player's selection and allows for different
-    //cases
-    playerSelection = playerSelection.trim().toLowerCase();
+
     // Decides the outcome of the game
 
     // If player enters the same as computer
@@ -55,15 +54,17 @@ function playRound(){
                     return "You lost! Rock smashes Scissors!";
             }
         }
+
         // If computer selects paper
         else if(computerSelection == "paper"){
             switch(playerSelection){
                 case "scissors":
                     return "You won! Scissors cut Paper!";
                 case "rock":
-                    return "You lost! Paper covers rock!";
+                    return "You lost! Paper covers Rock!";
             }
         }
+
         // If computer selects scissors
         else{
             switch(playerSelection){
@@ -76,5 +77,11 @@ function playRound(){
     }
 }
 
-console.log(playRound())
+function game(){
+    for(let i = 0; i < 5; i++){
+        alert(playRound())
+    }
+}
+
+game()
 
