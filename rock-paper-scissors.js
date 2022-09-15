@@ -98,6 +98,7 @@ function game(){
     let outcome = `Final Score:
 Player: ${playerScore}
 Computer: ${computerScore}
+Draws: ${5-playerScore-computerScore}
 `;
 
     // Adds a qualifying message onto the end depending on the result
