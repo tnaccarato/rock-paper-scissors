@@ -78,8 +78,29 @@ function playRound(){
 }
 
 function game(){
+    // Declares variables for computer and user score
+    let computerScore, playerScore;
     for(let i = 0; i < 5; i++){
-        alert(playRound())
+        result = playRound()
+        console.log(result)
+        if(result.includes("won")){
+            playerScore ++
+        }
+        else if(result.includes("lost")){
+            computerScore ++
+        }
+    }
+    console.log(`Final Score:
+        Player: ${playerScore}
+        Computer: ${computerScore}`)
+    if (computerScore == playerScore){
+        console.log("It's a draw!")
+    }
+    else if(playerScore > computerScore){
+        console.log("You win!")
+    }
+    else{
+        console.log("You lost!")
     }
 }
 
