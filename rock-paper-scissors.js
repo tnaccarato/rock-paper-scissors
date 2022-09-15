@@ -79,7 +79,7 @@ function playRound(){
 
 function game(){
     // Declares variables for computer and user score
-    let computerScore, playerScore;
+    let computerScore = 0, playerScore = 0;
     for(let i = 0; i < 5; i++){
         result = playRound()
         console.log(result)
@@ -91,8 +91,8 @@ function game(){
         }
     }
     console.log(`Final Score:
-        Player: ${playerScore}
-        Computer: ${computerScore}`)
+Player: ${playerScore}
+Computer: ${computerScore}`)
     if (computerScore == playerScore){
         console.log("It's a draw!")
     }
