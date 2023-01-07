@@ -55,12 +55,17 @@ function updateScore(){
 // Resets the scores
 function resetScore(){
     // Sets scores to zero
+    rounds = 0
     playerScore = 0
     draws = 0
     computerScore = 0
     // Resets the text
     TEXT.textContent = 'Let\'s play rock, paper, scissors!'
-    SCORE.remove()
+    SCORE.textContent = ''
+    // Unhides buttons
+    BUTTONS.forEach((button) => {
+        button.style.visibility = 'visible'
+    })
 }
 
 // Plays a round
@@ -157,12 +162,20 @@ function result(){
     else{
         TEXT.textContent = `You lost!`
     }
+
+    // Hides the buttons
+    BUTTONS.forEach((button) => {
+        button.style.visibility = 'hidden'
+    })
+
     const RESETBUTTON = document.createElement('button')
     RESETBUTTON.textContent = 'Play again'
+    document.body.appendChild(RESETBUTTON)
     RESETBUTTON.addEventListener('click', (e) => {
         resetScore()
+        RESETBUTTON.remove()
         });
-    document.body.appendChild(RESETBUTTON)
+
 }
 
 
