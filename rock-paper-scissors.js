@@ -1,3 +1,10 @@
+// Declares variables for counting rounds and scores
+let computerScore = 0, playerScore = 0, draws = 0, rounds = 0
+
+// Declares constants for text elements
+const TEXT = document.querySelector('div.text')
+const SCORE = document.querySelector('div.score')
+
 // Gets a random choice for the computer out of rock, paper or scissors
 function getComputerChoice(){
     // Gets a random number between 1 and 3
@@ -21,37 +28,74 @@ function getComputerChoice(){
     return computerChoice
 }
 
+
+// Plays a round each time a button is pressed
+const BUTTONS = document.querySelectorAll('button')
+BUTTONS.forEach((button) => {
+    // and for each one we add a 'click' listener
+    button.addEventListener('click', (e) => {
+    rounds ++
+    playRound(e.target.id); // Sets the playerChoice to the id of the button (rock, paper or scissors)
+    });
+});
+
+// Updates the score and round after each round
+function updateScore(){
+    if(rounds >= 5){
+        result()
+    }
+    else{
+    SCORE.textContent = `Round ${rounds} \r\n
+    Player: ${playerScore} \r\n
+    Computer: ${computerScore} \r\n
+    Draws: ${draws}`
+    }
+}
+
+// Resets the scores
+function resetScore(){
+    // Sets scores to zero
+    playerScore = 0
+    draws = 0
+    computerScore = 0
+    // Resets the text
+    TEXT.textContent = 'Let\'s play rock, paper, scissors!'
+    SCORE.remove()
+}
+
 // Plays a round
-function playRound(){
+function playRound(playerChoice){
     // Gets the computer and player selections
     computerSelection = getComputerChoice();
-    playerSelection = prompt("Please enter either rock, paper or scissors:")
-    // Anticipates whitespace around player's selection and allows for different
-    //cases
-    playerSelection = playerSelection.trim().toLowerCase();
-    // Creates an array of valid responses for player selection
-    validResponses = ["rock", "paper", "scissors"];
-    // Allows user to retry until they enter a valid choice
-    while(!validResponses.includes(playerSelection)){
-        playerSelection = prompt("Response not recognised. Please enter rock, "
-        + "paper or scissors:");
-        playerSelection = playerSelection.trim().toLowerCase();
-    }
-
+    playerSelection = playerChoice
     // Decides the outcome of the game
 
     // If player enters the same as computer
     if(playerSelection == computerSelection){
-        return `It's a draw! You both picked ${playerSelection}!`;
+        // Updates the text content in text div
+        TEXT.textContent = `It's a draw! You both picked ${playerSelection}!`
+        // Updates the score
+        draws ++
+        updateScore()
+
     }
     else{
         // If computer selects rock
         if(computerSelection == "rock"){
             switch(playerSelection){
                 case "paper":
-                    return "You won! Paper covers Rock!";
+                    // Updates the text content in text div
+                    TEXT.textContent = "You won! Paper covers Rock!"
+                    // Updates the score
+                    playerScore ++
+                    updateScore()
+                    return
                 case "scissors":
-                    return "You lost! Rock smashes Scissors!";
+                    // Updates the text content in text div
+                    TEXT.textContent = "You lost! Rock smashes Scissors!"
+                    // Updates the score
+                    computerScore ++
+                    updateScore()
             }
         }
 
@@ -59,9 +103,18 @@ function playRound(){
         else if(computerSelection == "paper"){
             switch(playerSelection){
                 case "scissors":
-                    return "You won! Scissors cut Paper!";
+                    // Updates the text content in text div
+                    TEXT.textContent = "You won! Scissors cut Paper!"
+                    // Updates the score
+                    playerScore ++
+                    updateScore()
+                    return
                 case "rock":
-                    return "You lost! Paper covers Rock!";
+                    // Updates the text content in text div
+                    TEXT.textContent = "You lost! Paper covers Rock!"
+                    // Updates the score
+                    computerScore ++
+                    updateScore()
             }
         }
 
@@ -69,50 +122,47 @@ function playRound(){
         else{
             switch(playerSelection){
                 case "rock":
-                    return "You won! Rock smashes Scissors!";
+                    // Updates the text content in text div
+                    TEXT.textContent = "You won! Rock smashes Scissors!"
+                    // Updates the score
+                    playerScore ++
+                    updateScore()
+                    return
                 case "paper":
-                    return "You lost! Scissors cut Paper!";
+                    // Updates the text content in text div
+                    TEXT.textContent = "You lost! Scissors cut Paper!"
+                    // Updates the score
+                    computerScore ++
+                    updateScore()
             }
         }
     }
 }
 
-function game(){
-    // Declares variables for computer and user score
-    let computerScore = 0, playerScore = 0;
-    // Loops the game for 5 rounds
-    for(let i = 0; i < 5; i++){
-        result = playRound()
-        alert(result)
-        // If won is in the playround return, adds to player score
-        if(result.includes("won")){
-            playerScore ++
-        }
-        // If lost is in return, adds to pc score
-        else if(result.includes("lost")){
-            computerScore ++
-        }
-    }
-
-    // Prints an alert with the final score
-    let outcome = `Final Score:
-Player: ${playerScore}
-Computer: ${computerScore}
-Draws: ${5-playerScore-computerScore}
+function result(){
+    // Updates the score with the final score
+    SCORE.textContent = `Final Score: \r\n
+        Player: ${playerScore} \r\n
+        Computer: ${computerScore} \r\n
+        Draws: ${draws} \r\n
 `;
 
     // Adds a qualifying message onto the end depending on the result
     if (computerScore == playerScore){
-        outcome += `It's a draw!`
+        TEXT.textContent = `It's a draw!`
     }
     else if(playerScore > computerScore){
-        outcome +=`You win!`
+        TEXT.textContent = `You win!`
     }
     else{
-        outcome += `You lost!`
+        TEXT.textContent = `You lost!`
     }
-    alert(outcome)
+    const RESETBUTTON = document.createElement('button')
+    RESETBUTTON.textContent = 'Play again'
+    RESETBUTTON.addEventListener('click', (e) => {
+        resetScore()
+        });
+    document.body.appendChild(RESETBUTTON)
 }
 
-game()
 
