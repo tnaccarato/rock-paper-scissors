@@ -1,3 +1,22 @@
 div.score{
     white-space: pre-line;
 }
+
+.text{
+    text-align: center;
+}
+
+.score{
+    text-align: center;
+}
+
+div.buttons{
+    display: flex;
+    justify-content: space-around;
+    margin-left: 50px;
+}
+
+img{
+    height: 80px;
+    width: 80px;
+}
