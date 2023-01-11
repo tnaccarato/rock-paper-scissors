@@ -80,7 +80,7 @@ function resetScore(){
     draws = 0
     computerScore = 0
     // Resets the text
-    TEXT.textContent = 'Let\'s play rock, paper, scissors!'
+    TEXT.textContent = 'Let\'s play rock, paper, scissors! Best of 5!'
     SCORE.textContent = ''
     // Unhides buttons
     BUTTONS.forEach((button) => {
@@ -103,7 +103,9 @@ function playRound(playerChoice){
         draws ++
         updateScore()
         // Updates the image
+        if(rounds < 5){     // Stops interference with final score
         updateImage('draw')
+        }
     }
     else{
         // If computer selects rock
@@ -116,7 +118,9 @@ function playRound(playerChoice){
                     playerScore ++
                     updateScore()
                     // Updates the image
-                    updateImage('win')
+                    if(rounds < 5){
+                        updateImage('win')
+                    }
                     return
                 case "scissors":
                     // Updates the text content in text div
@@ -125,7 +129,9 @@ function playRound(playerChoice){
                     computerScore ++
                     updateScore()
                     // Updates the image
-                    updateImage('loss')
+                    if(rounds < 5){
+                        updateImage('loss')
+                    }
             }
         }
 
@@ -139,7 +145,9 @@ function playRound(playerChoice){
                     playerScore ++
                     updateScore()
                     // Updates the image
-                    updateImage('win')
+                    if(rounds < 5){
+                        updateImage('win')
+                    }
                     return
                 case "rock":
                     // Updates the text content in text div
@@ -148,7 +156,9 @@ function playRound(playerChoice){
                     computerScore ++
                     updateScore()
                     // Updates the image
-                    updateImage('loss')
+                    if(rounds < 5){
+                        updateImage('loss')
+                    }
             }
         }
 
@@ -162,7 +172,9 @@ function playRound(playerChoice){
                     playerScore ++
                     updateScore()
                     // Updates the image
-                    updateImage('win')
+                    if(rounds < 5){
+                        updateImage('win')
+                    }
                     return
                 case "paper":
                     // Updates the text content in text div
@@ -171,7 +183,9 @@ function playRound(playerChoice){
                     computerScore ++
                     updateScore()
                     // Updates the image
-                    updateImage('loss')
+                    if(rounds < 5){
+                        updateImage('loss')
+                    }
             }
         }
     }
@@ -187,16 +201,16 @@ function result(){
 
     // Adds a qualifying message onto the end depending on the result
     if (computerScore == playerScore){
-        TEXT.textContent = `It's a draw!`
         updateImage('draw')
+        TEXT.textContent = `It's a draw!`
     }
     else if(playerScore > computerScore){
-        TEXT.textContent = `You win!`
         updateImage('win')
+        TEXT.textContent = `You win! Congratulation!`
     }
     else{
-        TEXT.textContent = `You lost!`
         updateImage('loss')
+        TEXT.textContent = `You lose! Better luck next time!`
     }
 
     // Hides the buttons
