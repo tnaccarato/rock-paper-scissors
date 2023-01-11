@@ -12,11 +12,21 @@ div.score{
 
 div.buttons{
     display: flex;
-    justify-content: space-around;
-    margin-left: 50px;
+    justify-content: center;
+    align-self: center;
 }
 
 img{
     height: 80px;
     width: 80px;
+    pointer-events: none;
+}
+
+.button{
+    height: 80px;
+    width: 80px;
+}
+
+.container{
+    text-align: center;
 }

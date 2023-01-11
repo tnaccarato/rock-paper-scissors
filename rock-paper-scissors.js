@@ -4,6 +4,7 @@ let computerScore = 0, playerScore = 0, draws = 0, rounds = 0
 // Declares constants for text elements
 const TEXT = document.querySelector('div.text')
 const SCORE = document.querySelector('div.score')
+const CONTAINER = document.querySelector('div.container')
 
 // Gets a random choice for the computer out of rock, paper or scissors
 function getComputerChoice(){
@@ -168,14 +169,14 @@ function result(){
         button.style.visibility = 'hidden'
     })
 
+    // Adds a reset button that resets the score when clicked
     const RESETBUTTON = document.createElement('button')
     RESETBUTTON.textContent = 'Play again'
-    document.body.appendChild(RESETBUTTON)
+    CONTAINER.appendChild(RESETBUTTON)
     RESETBUTTON.addEventListener('click', (e) => {
         resetScore()
         RESETBUTTON.remove()
         });
-
 }
 
 
