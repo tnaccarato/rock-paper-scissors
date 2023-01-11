@@ -1,10 +1,29 @@
 // Declares variables for counting rounds and scores
 let computerScore = 0, playerScore = 0, draws = 0, rounds = 0
 
-// Declares constants for text elements
+// Declares constants for HTML elements
 const TEXT = document.querySelector('div.text')
 const SCORE = document.querySelector('div.score')
 const CONTAINER = document.querySelector('div.container')
+
+// Creates an image for result image
+const RESULTIMAGE = document.createElement('img')
+CONTAINER.insertBefore(RESULTIMAGE, SCORE)
+RESULTIMAGE.style.visibility = 'hidden'
+
+// Updates the image depending on the results
+function updateImage(result){
+    RESULTIMAGE.style.visibility = 'visible'
+    if(result == 'draw'){
+        RESULTIMAGE.src = "images\\neutral face.png"
+    }
+    else if(result == 'win'){
+        RESULTIMAGE.src = "images\\smiley face.png"
+    }
+    else if(result == 'loss'){
+        RESULTIMAGE.src = "images\\frowny face.png"
+    }
+}
 
 // Gets a random choice for the computer out of rock, paper or scissors
 function getComputerChoice(){
@@ -83,7 +102,8 @@ function playRound(playerChoice){
         // Updates the score
         draws ++
         updateScore()
-
+        // Updates the image
+        updateImage('draw')
     }
     else{
         // If computer selects rock
@@ -95,6 +115,8 @@ function playRound(playerChoice){
                     // Updates the score
                     playerScore ++
                     updateScore()
+                    // Updates the image
+                    updateImage('win')
                     return
                 case "scissors":
                     // Updates the text content in text div
@@ -102,6 +124,8 @@ function playRound(playerChoice){
                     // Updates the score
                     computerScore ++
                     updateScore()
+                    // Updates the image
+                    updateImage('loss')
             }
         }
 
@@ -114,6 +138,8 @@ function playRound(playerChoice){
                     // Updates the score
                     playerScore ++
                     updateScore()
+                    // Updates the image
+                    updateImage('win')
                     return
                 case "rock":
                     // Updates the text content in text div
@@ -121,6 +147,8 @@ function playRound(playerChoice){
                     // Updates the score
                     computerScore ++
                     updateScore()
+                    // Updates the image
+                    updateImage('loss')
             }
         }
 
@@ -133,6 +161,8 @@ function playRound(playerChoice){
                     // Updates the score
                     playerScore ++
                     updateScore()
+                    // Updates the image
+                    updateImage('win')
                     return
                 case "paper":
                     // Updates the text content in text div
@@ -140,6 +170,8 @@ function playRound(playerChoice){
                     // Updates the score
                     computerScore ++
                     updateScore()
+                    // Updates the image
+                    updateImage('loss')
             }
         }
     }
@@ -156,12 +188,15 @@ function result(){
     // Adds a qualifying message onto the end depending on the result
     if (computerScore == playerScore){
         TEXT.textContent = `It's a draw!`
+        updateImage('draw')
     }
     else if(playerScore > computerScore){
         TEXT.textContent = `You win!`
+        updateImage('win')
     }
     else{
         TEXT.textContent = `You lost!`
+        updateImage('loss')
     }
 
     // Hides the buttons
@@ -169,13 +204,15 @@ function result(){
         button.style.visibility = 'hidden'
     })
 
-    // Adds a reset button that resets the score when clicked
+    // Adds a reset button that resets the game when clicked
     const RESETBUTTON = document.createElement('button')
     RESETBUTTON.textContent = 'Play again'
     CONTAINER.appendChild(RESETBUTTON)
+    // When clicked resets score, removes the button and hides the result image
     RESETBUTTON.addEventListener('click', (e) => {
         resetScore()
         RESETBUTTON.remove()
+        RESULTIMAGE.style.visibility = 'hidden'
         });
 }
 
